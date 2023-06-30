@@ -39,4 +39,19 @@ st.write('## Input Value')
 value_df = pd.DataFrame({'data':'data', 'sepal length (cm)':sepalValue, 'petal length (cm)':petalValue}, index=[0])
 value_df.set_index('data', inplace=True)
 
+# 入力値の値
+st.write(value_df)
+
+# 予測値のデータフレーム
+pred_probs = clf.predict_proba(value_df)
+pred_df = pd.DataFrame(pred_probs,columns=['setosa','versicolor','virginica'],index=['probability'])
+
+st.write('## Prediction')
+st.write(pred_df)
+
+# 予測結果の出力
+name = pred_df.idxmax(axis=1).tolist()
+st.write('## Result')
+st.write('このアイリスはきっと',str(name[0]),'です!')
+
 
